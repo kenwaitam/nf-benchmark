@@ -19,7 +19,7 @@ router.get('/serv-measure', function (req, res, next) {
     }
   };
 
-  var options = { debug: true, minSamples: 1000, maxTime: 10 };
+  var options = { debug: true, runMode: 'parallel', maxConcurrentRequests: 100, minSamples: 1000};
 
   apiBenchmark.measure(services, routes,options, function (err, results) {
     apiBenchmark.getHtml(results, function (error, html) {
@@ -33,7 +33,7 @@ router.get('/serv-measure', function (req, res, next) {
 router.get('/ex-measure', function (req, res, next) {
 
   var services = {
-    server1: 'http://35.177.89.183:9000/',
+    server1: 'http://35.176.27.201:9000/',
   };
 
   var routes = {
@@ -43,7 +43,7 @@ router.get('/ex-measure', function (req, res, next) {
     }
   };
 
-  var options = { debug: true, minSamples: 100, maxTime: 10 };
+  var options = { debug: true, runMode: 'parallel', maxConcurrentRequests: 100, minSamples: 1000 };
 
   apiBenchmark.measure(services, routes, options, function (err, results) {
     apiBenchmark.getHtml(results, function (error, html) {
@@ -58,7 +58,7 @@ router.get('/ex-measure', function (req, res, next) {
 router.get('/compare', function (req, res, next) {
 
   var services = {
-    'Server': 'http://35.177.89.183:9000/',
+    'Server': 'http://35.176.27.201:9000/',
     'Serverless': 'https://zrpb17s2w2.execute-api.eu-west-2.amazonaws.com/dev/'
   };
 
@@ -69,10 +69,14 @@ router.get('/compare', function (req, res, next) {
     }
   };
 
-  var options = { debug: true, minSamples: 100, maxTime: 5 };
+  var options = { debug: true, runMode: 'parallel', maxConcurrentRequests: 100, minSamples: 1000};
 
   apiBenchmark.compare(services, routes, options, function (err, results) {
-    console.log(results);
+    apiBenchmark.getHtml(results, function (error, html) {
+      // console.log(html);
+      res.send(html);
+      // now save it yourself to a file and enjoy
+    });
   });
 
 });
