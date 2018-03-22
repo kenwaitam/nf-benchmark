@@ -33,7 +33,7 @@ router.get('/serv-measure', function (req, res, next) {
 router.get('/ex-measure', function (req, res, next) {
 
   var services = {
-    server1: 'http://35.177.89.183:9000/',
+    server1: 'http://35.176.27.201:9000/',
   };
 
   var routes = {
@@ -58,7 +58,7 @@ router.get('/ex-measure', function (req, res, next) {
 router.get('/compare', function (req, res, next) {
 
   var services = {
-    'Server': 'http://35.177.89.183:9000/',
+    'Server': 'http://35.176.27.201:9000/',
     'Serverless': 'https://zrpb17s2w2.execute-api.eu-west-2.amazonaws.com/dev/'
   };
 
